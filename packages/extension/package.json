@@ -3,7 +3,7 @@
   "displayName": "VSCode as MCP Server",
   "description": "Expose VSCode features such as file viewing and editing as MCP, enabling the LLM to access these functionalities.",
   "publisher": "acomagu",
-  "version": "0.0.25",
+  "version": "0.0.27",
   "type": "commonjs",
   "icon": "icon.png",
   "engines": {
