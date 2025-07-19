@@ -1,0 +1,106 @@
+{
+  "name": "vscode-as-mcp-server",
+  "displayName": "VSCode as MCP Server",
+  "description": "Expose VSCode features such as file viewing and editing as MCP, enabling the LLM to access these functionalities.",
+  "publisher": "acomagu",
+  "version": "0.0.25",
+  "type": "commonjs",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.98.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "mcpServer.stopServer",
+        "title": "MCP Server: Stop Server"
+      },
+      {
+        "command": "mcpServer.startServer",
+        "title": "MCP Server: Start Server"
+      },
+      {
+        "command": "mcpServer.toggleActiveStatus",
+        "title": "MCP Server: Toggle Active Status"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "mcpServer.startOnActivate": {
+          "type": "boolean",
+          "default": true,
+          "description": "Determines if the MCP Server should start automatically on VSCode activation."
+        },
+        "mcpServer.port": {
+          "type": "number",
+          "default": 60100,
+          "description": "The port that the MCP Server listens on. Set in case of conflicts or custom configurations."
+        },
+        "mcpServer.confirmationUI": {
+          "type": "string",
+          "enum": [
+            "statusBar",
+            "quickPick"
+          ],
+          "default": "quickPick",
+          "description": "The UI to use for confirming changes: status bar buttons or quick pick dialog."
+        },
+        "mcpServer.confirmNonDestructiveCommands": {
+          "type": "boolean",
+          "default": false,
+          "description": "If true, even commands marked as non-destructive (modifySomething=false) will require user confirmation."
+        }
+      }
+    }
+  },
+  "main": "./dist/extension.js",
+  "scripts": {
+    "vscode:prepublish": "pnpm package",
+    "package-extension": "cross-env npm_config_user_agent=pnpm vsce package --no-dependencies",
+    "compile": "pnpm check-types && node build.js",
+    "check-types": "tsc --noEmit",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node build.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "compile-tests": "node build.js --test",
+    "pretest": "pnpm compile-tests",
+    "test": "vscode-test",
+    "package": "pnpm check-types && node build.js --production"
+  },
+  "devDependencies": {
+    "@types/diff": "^7.0.1",
+    "@types/express": "^5.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "~22.13.10",
+    "@types/pdf-parse": "^1.1.4",
+    "@types/sinon": "^17.0.4",
+    "@types/vscode": "^1.98.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.3.2",
+    "cross-env": "^7.0.3",
+    "sinon": "^20.0.0",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.8.2",
+    "webpack": "^5.97.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.3",
+    "dedent": "^1.5.3",
+    "diff": "^7.0.0",
+    "esbuild": "^0.25.1",
+    "express": "^4.21.2",
+    "ignore": "^7.0.3",
+    "isbinaryfile": "^5.0.4",
+    "mammoth": "^1.9.0",
+    "p-wait-for": "^5.0.2",
+    "pdf-parse": "^1.1.1",
+    "strip-bom": "^5.0.0"
+  },
+  "packageManager": "pnpm@10.6.1+sha512.40ee09af407fa9fbb5fbfb8e1cb40fbb74c0af0c3e10e9224d7b53c7658528615b2c92450e74cfad91e3a2dcafe3ce4050d80bda71d757756d2ce2b66213e9a3"
+}

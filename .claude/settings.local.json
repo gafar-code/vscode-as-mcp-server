@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install:*)",
+      "Bash(pnpm package-extension:*)",
+      "Bash(pnpm:*)",
+      "Bash(powershell.exe:*)",
+      "Bash(npx tsc:*)",
+      "Bash(node build.js --production)",
+      "Bash(npx vsce package:*)"
+    ],
+    "deny": []
+  }
+}

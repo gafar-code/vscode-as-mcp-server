@@ -1,0 +1,7 @@
+*.d.ts
+*.vsix
+.vscode-test/**
+dist
+node_modules
+out
+tsconfig.tsbuildinfo
